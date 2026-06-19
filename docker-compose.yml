@@ -3,6 +3,7 @@ services:
     image: coollabsio/openclaw:latest
     environment:
       PORT: "18789"
+      OPENCLAW_GATEWAY_PORT: "18788" 
       GEMINI_API_KEY: "${GEMINI_API_KEY}"
       OPENCLAW_GATEWAY_TOKEN: "${OPENCLAW_GATEWAY_TOKEN}"
       BROWSER_CDP_URL: "http://browser:9223"
