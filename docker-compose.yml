@@ -1,0 +1,28 @@
+services:
+  openclaw:
+    image: coollabsio/openclaw:latest
+    environment:
+      PORT: "18789"
+      GEMINI_API_KEY: "${GEMINI_API_KEY}"
+      OPENCLAW_GATEWAY_TOKEN: "${OPENCLAW_GATEWAY_TOKEN}"
+      BROWSER_CDP_URL: "http://browser:9223"
+      BROWSER_DEFAULT_PROFILE: "openclaw"
+      BROWSER_EVALUATE_ENABLED: "true"
+    volumes:
+      - /data/openclaw/config:/data/.openclaw
+      - /data/openclaw/workspace:/data/workspace
+    depends_on:
+      - browser
+    restart: unless-stopped
+
+  browser:
+    image: coollabsio/openclaw-browser:latest
+    environment:
+      CHROME_CLI: "--remote-debugging-port=9222"
+    volumes:
+      - browser-data:/config
+    shm_size: 2g
+    restart: unless-stopped
+
+volumes:
+  browser-data:
