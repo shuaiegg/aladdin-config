@@ -1,6 +1,8 @@
 services:
   openclaw:
     image: coollabsio/openclaw:latest
+    networks:
+      - coolify 
     environment:
       PORT: "18789"
       OPENCLAW_GATEWAY_PORT: "18788" 
@@ -27,3 +29,7 @@ services:
 
 volumes:
   browser-data:
+
+networks:
+  coolify:
+    external: true
